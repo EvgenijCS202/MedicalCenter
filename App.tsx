@@ -1,25 +1,13 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  View,
-  Text,
-} from 'react-native';
-import Navigate from './assets/navigation';
+import Navigator from './src/navigators/MainStackNavigator';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const App = () => {
   return (
-    <Navigate/>
+    <GestureHandlerRootView style={{flex:1}}>
+      <Navigator/>
+    </GestureHandlerRootView>
   );
 };
-
-const styles = StyleSheet.create({
-  box: {
-    backgroundColor: "gold",
-  },
-  box2: {
-    backgroundColor: "red",
-  },
-});
 
 export default App;

@@ -2,7 +2,8 @@ import { addDays, format, getDay, startOfWeek } from 'date-fns'
 type weekDays = {formatted: string,
   date: Date,
   key: number,}[]
-export default function generateDates( dateStart: Date, dateEnd: Date) {
+  
+export default function DateSortedSlotArray( dateStart: Date, dateEnd: Date) {
     let start=startOfWeek(dateStart, {weekStartsOn: 1})
     let n=1;
     const final:{week: weekDays, key: number}[]= []

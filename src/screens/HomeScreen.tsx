@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import { View, TouchableOpacity, FlatList, Text, StyleSheet} from 'react-native';
+import { View, Pressable, FlatList, Text, StyleSheet} from 'react-native';
+import { globalStyles } from '../constants/globalStyles';
 
 export default function HomeScreen( {navigation}:any ) {
     const [List, setList] = useState([
@@ -19,14 +20,14 @@ export default function HomeScreen( {navigation}:any ) {
       <View>
           <View style={{height: '100%'}}>
             <FlatList data={List} renderItem={({item}) => (
-              <TouchableOpacity onPress={() => {
+              <Pressable onPress={() => {
                 navigation.navigate(
-                  "Registration", {data: item}
+                  "Service", {data: item}
               )}}>
-                  <View style={styles.itemStyle}>
-                    <Text style={styles.textStyle}>{item.title}</Text>
-                  </View>
-              </TouchableOpacity>
+                <Text style={[globalStyles.subTitle, styles.itemStyle, {textAlignVertical: 'center'}]}>
+                  {item.title}
+                </Text>
+              </Pressable>
             ) }/>
           </View>
       </View>
@@ -40,13 +41,4 @@ export default function HomeScreen( {navigation}:any ) {
             borderRadius: 5,
             height: 40,
         },
-        textStyle: {
-            alignSelf: "center",
-        },
-        titleSt: {
-            textAlign: 'center',
-            fontSize: 20,
-            fontWeight: '900',
-            color: 'black'
-        }
     });
