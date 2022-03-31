@@ -9,7 +9,7 @@ interface ISearchInput {
 const SearchInput = ({text, style}:ISearchInput) => {
   return (
     <View style={[styles.container,style]}>
-        <Icon name='magnifyingglass' color={'black'} style={{opacity: 0.6, marginRight: 13}} size={16}/>
+        <Icon name='magnifyingglass' color={'#3C3C4399'} style={{opacity: 0.6, marginRight: 13}} size={20}/>
         <Text style={[globalStyles.text,
             {color:'rgba(60,60,67,0.6)'}]}>{text}</Text>
     </View>

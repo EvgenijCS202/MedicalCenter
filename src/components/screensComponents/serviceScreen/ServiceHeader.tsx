@@ -1,31 +1,22 @@
 import { StyleSheet, Text, View, Pressable, Button } from 'react-native'
 import React from 'react'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+interface IServiceHeader {
+    navigation: any,
+    data: {
+        name: string,
+        description: String,
+        imgSource: any,
+        time: string,
+        age: string,
+        price: number,
+        conclusionTime: string,
+    },
 
+}
 const ServiceHeader = ({data, dateReg, dateOpen, navigation}:any) => {
   return (
-    <View style={{flex:1}}>
-        <Text style={styles.titleSt}>
-            Информация:
-        </Text>
-        <Text style={styles.infoSt}>
-            {data.info}
-        </Text>
-        <View style={styles.dateSt}>
-            <Text style={styles.dateText}>
-                Дата: {dateReg}
-            </Text>
-            <Pressable onPress={dateOpen}>
-                <Icon name={'event'} size={40} color={'gold'} />
-            </Pressable>
-        </View>
-        <View style={styles.buttonSt}>
-            <Button color={'#00ff55'} title='Записаться' onPress={
-                () => navigation.navigate(
-                    "Home"
-                )
-            }/>
-        </View>
+    <View>
     </View>
   )
 }

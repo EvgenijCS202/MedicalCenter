@@ -14,7 +14,7 @@ const BaseHeader = ({title, props}: IBaseHeader) => {
       onPress={ () => props.navigation.goBack()}>
         <Icon name='vector' color='black' size={16}/>
       </Pressable>
-      <Text style={[globalStyles.H3,{color: white}]}>
+      <Text style={[globalStyles.H3,{color: white, paddingRight: 40}]}>
         {title}
       </Text>
       <View></View>

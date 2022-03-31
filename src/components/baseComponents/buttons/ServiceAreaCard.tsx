@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import Icon from '../../../../assets/img/icons/icons'
 import { white } from '../../../constants/colors'
@@ -15,19 +15,21 @@ interface IServiceAreaCard {
         age: string,
         conclusionTime: string,
     }[],
+    link: any,
     key: number
 }
 const ServiceAreaCard = (item: IServiceAreaCard) => {
     if(item.name=='')
-     return (<View style={styles.container} key={item.key}></View>)
+     return (<View style={[styles.container,{elevation:0}]} key={item.key}></View>)
     return (
-        <View style={[styles.container,{backgroundColor: item.color}]} key={item.key}>
+        <Pressable style={[styles.container,{backgroundColor: item.color}]} key={item.key}
+        onPress={item.link}>
             <View style={styles.iconContainer} >
                 <Icon name={item.iconName} size={40} style={{color: item.color}} />
             </View>
             <Text style={[globalStyles.H4,styles.nameStyle]}>{item.name}</Text>
             <Text style={[globalStyles.H4,{color: '#DEDEDE', marginHorizontal: 14}]}>{item.services.length} услуг</Text>
-        </View>
+        </Pressable>
     )
 }
 
@@ -38,7 +40,8 @@ const styles = StyleSheet.create({
         width: 160,
         height: 180,
         borderRadius: 12,
-        marginRight: 10
+        marginRight: 10,
+        elevation: 5,
     },
     iconContainer: {
         backgroundColor: white,

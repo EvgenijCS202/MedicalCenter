@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native"
 import { width } from "."
-import { blue } from "./colors"
+import { blue, gray } from "./colors"
 
 export const globalStyles = StyleSheet.create({
     title: {
@@ -46,6 +46,11 @@ export const globalStyles = StyleSheet.create({
         fontSize: 28,
         color: '#000000'
     },
+    H2: {
+        fontFamily: 'Manrope-SemiBold',
+        fontSize: 24,
+        color: '#000000'
+    },
     H3: {
         fontFamily: 'Manrope-SemiBold',
         fontSize: 18,
@@ -66,9 +71,19 @@ export const globalStyles = StyleSheet.create({
         fontSize: 14,
         color: blue,
     },
+    Captures: {
+        fontFamily: 'Manrope-Medium',
+        fontSize: 12,
+        color: gray,
+    },
     text: {
         fontFamily: 'Manrope-Regular',
         fontSize: 14,
+        color: '#000000'
+    },
+    smallText: {
+        fontFamily: 'Manrope-Regular',
+        fontSize: 12,
         color: '#000000'
     }
 })

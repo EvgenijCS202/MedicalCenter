@@ -3,13 +3,13 @@ import { Dimensions} from "react-native"
 export const {width,height} = Dimensions.get('screen')
 
 export const Day = (day: number): string => {switch(day) {
-    case 1: return 'M'
-    case 2: return 'T'
-    case 3: return 'W'
-    case 4: return 'T'
-    case 5: return 'F'
-    case 6: return 'S'
-    case 0: return 'S'
+    case 1: return 'П'
+    case 2: return 'В'
+    case 3: return 'С'
+    case 4: return 'Ч'
+    case 5: return 'П'
+    case 6: return 'С'
+    case 0: return 'В'
     default: return ''
 }}
 

@@ -5,16 +5,19 @@ import {Day, width} from '../../../constants'
 import { startOfDay } from 'date-fns';
 import DateGetDates from './DateGetDates';
 import DateSortedSlotArray from './DateSortedSlotArray';
-
-const DateCalendar = ({sel, setSel}:any) => {
-    const dateSlots = DateGetDates()
-
+import { gray, lightBlue, white } from '../../../constants/colors';
+interface IDateCalendar {
+    sel: Date,
+    setSel: any,
+    dateSlots: Date[]
+}
+const DateCalendar = ({sel, setSel, dateSlots}:IDateCalendar) => {
     const lastDate = dateSlots[dateSlots.length-1]
     const data = useMemo(() => DateSortedSlotArray(new Date(), lastDate),[lastDate])
 
     const circleColor = (date: Date) => { 
-        return sel.valueOf()-date.valueOf()==0?'gold':
-        (startOfDay(new Date()).valueOf()-date.valueOf()==0?'#00ffff':'white')
+        return sel.valueOf()-date.valueOf()==0?[styles.normalCircle,styles.selCircle]:
+        (startOfDay(new Date()).valueOf()-date.valueOf()==0?[styles.normalCircle,styles.startCircle]:styles.normalCircle)
     }
 
     const renderWeek = (item: any) => (
@@ -24,8 +27,7 @@ const DateCalendar = ({sel, setSel}:any) => {
             </Text>
             <Pressable style={styles.dayNum} onPress={() => 
             (startOfDay(new Date()).valueOf()-item.date.valueOf()<=0?setSel(item.date):(null))}>
-                <Text style={[styles.dayNum, styles.dayNumText,
-                    {backgroundColor: circleColor(item.date)}]}>
+                <Text style={circleColor(item.date)}>
                     {item.date.getUTCDate()}
                 </Text>
             </Pressable>
@@ -80,4 +82,21 @@ const styles = StyleSheet.create({
         borderRadius: width*0.9/7-10,
         margin: 0,
     },
+    normalCircle: {
+        height: width*0.9/7-10,
+        borderRadius: width*0.9/7-10,
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        fontSize: 20,
+        color: 'black',
+        backgroundColor: white
+    },
+    selCircle: {
+        color: white,
+        backgroundColor: lightBlue
+    },
+    startCircle: {
+        color: white,
+        backgroundColor: gray
+    }
 })
