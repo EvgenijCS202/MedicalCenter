@@ -1,20 +1,27 @@
 import { addDays, format, getDay, startOfWeek } from 'date-fns'
-type weekDays = {formatted: string,
+type weekDay = {
+  formatted: string,
   date: Date,
-  key: number,}[]
+  key: number,
+}
+type week = { 
+  week: weekDay[],
+  key: number
+}
   
 export default function DateSortedSlotArray( dateStart: Date, dateEnd: Date) {
     let start=startOfWeek(dateStart, {weekStartsOn: 1})
     let n=1;
-    const final:{week: weekDays, key: number}[]= []
+    const final: week[]= []
 
     while(start.valueOf() - dateEnd.valueOf()<0)
     {
-      const week: weekDays = [] 
+      const week: weekDay[] = [] 
       for(let i=1; i<8; ++i)
       {
           const newDate = addDays(start,i-1)
-          week.push({ formatted: format(newDate, 'EEE'),
+          week.push({ 
+          formatted: format(newDate, 'EEE'),
           date: newDate,
           key: getDay(newDate)
           })

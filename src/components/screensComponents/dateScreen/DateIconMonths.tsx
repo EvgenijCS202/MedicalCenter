@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Text, View } from 'react-native'
 import React from 'react'
 import Icon from '../../../../assets/img/icons/icons'
 import { getMonth } from 'date-fns'
@@ -35,7 +35,7 @@ const DateIconMonths = ({dates}: IDateIconMonths) => {
     else
         text=textMonth(getMonth(start))+'-'+textMonth(getMonth(end))
     return (
-        <View style={styles.container}>
+        <View style={{flexDirection: 'row'}}>
             <Icon name='calendar' style={{color: lightBlue}} size={30}/>
             <Text style={[globalStyles.smallText, {color: gray,textAlignVertical: 'center'}]}>{text}</Text>
         </View>
@@ -43,9 +43,3 @@ const DateIconMonths = ({dates}: IDateIconMonths) => {
 }
 
 export default DateIconMonths
-
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row'
-    }
-})

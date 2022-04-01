@@ -1,12 +1,16 @@
 import { addHours, startOfDay } from 'date-fns';
-
-const DateGetTime = ({dateSlots, date, dayTime}: any) => {
+interface IDateGetTime {
+    dateSlots: Date[],
+    dateSel: Date,
+    dayTime: number
+}
+const DateGetTime = ({dateSlots, dateSel, dayTime}: IDateGetTime) => {
     const times: {date: Date, key: number}[]=[]
     let n=1
     for(let i=0;i<dateSlots.length;++i)
-        if(startOfDay(dateSlots[i]).valueOf()-date.valueOf()==0)
+        if(startOfDay(dateSlots[i]).valueOf()-dateSel.valueOf()==0)
         {
-            if(dateSlots[i].valueOf() - addHours(date,12).valueOf()<0)
+            if(dateSlots[i].valueOf() - addHours(dateSel,12).valueOf()<0)
             {
                 if(dayTime==1)
                 {
@@ -16,7 +20,7 @@ const DateGetTime = ({dateSlots, date, dayTime}: any) => {
                 else
                 continue
             }
-            else if(dateSlots[i].valueOf() - addHours(date,16).valueOf()<0)
+            else if(dateSlots[i].valueOf() - addHours(dateSel,16).valueOf()<0)
             {
                 if(dayTime==2)
                 {

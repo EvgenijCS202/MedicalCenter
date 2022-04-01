@@ -1,12 +1,7 @@
 import React from 'react';
-import { View, Image, Text, StyleSheet, Pressable} from 'react-native';
-import { Modalize } from 'react-native-modalize';
-import DateScreen from './DateScreen';
-import ServiceHeader from '../components/screensComponents/serviceScreen/ServiceHeader';
+import { View, Image, Text, StyleSheet} from 'react-native';
 import { globalStyles } from '../constants/globalStyles';
-import { height, stringDate, width } from '../constants';
-import TimeSlotContext from '../contexts/TimeSlotContext';
-import DateGetDates from '../components/screensComponents/dateScreen/DateGetDates'
+import { height, width } from '../constants';
 import { white } from '../constants/colors';
 import DescriptionCard from '../components/baseComponents/buttons/DescriptionCard';
 import SubmitButton from '../components/baseComponents/buttons/SubmitButton';
@@ -27,15 +22,7 @@ interface IServiceScreen {
     }
 }
 export default function ServiceScreen({navigation, route}: IServiceScreen) {
-    // const dateSlots = DateGetDates()
-    // const [timeSel, setTimeSel] = useState(dateSlots[0])
-    // const [dateReg, setDateReg] = useState(stringDate(dateSlots[0]));
-
-    // const modalizeRef = useRef<Modalize>(null);
-    // const dateOpen = () => { modalizeRef.current?.open(); };
-    // const dateClose = () => { modalizeRef.current?.close(); };
     return (
-        // <TimeSlotContext.Provider value={{dateSlots,timeSel, setTimeSel}}>
             <View style={{backgroundColor: white, height: height-160}}>
                 <View style={{flex: 1}}>
                     <View style={{flexDirection: 'row', marginVertical: 24}}>
@@ -50,35 +37,7 @@ export default function ServiceScreen({navigation, route}: IServiceScreen) {
                     </View>
                 </View>
                 <SubmitButton text='Записаться на услугу' style={styles.button} onPress={()=>navigation.navigate('Date', {data: route.params.data})}/>
-                {/* <ServiceHeader
-                data={route.params.data}
-                dateReg={dateReg}
-                dateOpen={dateOpen}
-                navigation={navigation}
-                />
-                <Modalize 
-                ref={modalizeRef}
-                modalHeight={height/1.7}
-                snapPoint={height/1.7}
-                scrollViewProps={{ contentContainerStyle: { height: '100%'} }}
-                HeaderComponent={
-                <View>
-                    <Text style={[globalStyles.title, {marginTop: 10}]}>
-                        Выберите дату
-                    </Text>
-                </View>}
-                FooterComponent={
-                    <Pressable style={ globalStyles.buttonSt} onPress={() => {dateClose(); setDateReg(stringDate(timeSel))}}>
-                        <Text style={globalStyles.buttonText}>
-                            Выбрать
-                        </Text>
-                    </Pressable>
-                }
-                >
-                    <DateScreen />
-                </Modalize> */}
             </View>
-        // </TimeSlotContext.Provider>
     );
 };
 

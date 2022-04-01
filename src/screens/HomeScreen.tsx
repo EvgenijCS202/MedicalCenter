@@ -30,18 +30,6 @@ export default function HomeScreen( {navigation}:any ) {
             <Text style={[globalStyles.Links]}>Все доктора</Text>
           </Pressable>
         </View>
-          {/* <View style={{height: '100%'}}>
-            <FlatList data={List} renderItem={({item}) => (
-              <Pressable onPress={() => {
-                navigation.navigate(
-                  "Service", {data: item}
-              )}}>
-                <Text style={[globalStyles.subTitle, styles.itemStyle, {textAlignVertical: 'center'}]}>
-                  {item.title}
-                </Text>
-              </Pressable>
-            ) }/>
-          </View> */}
       </View>
     );
   };

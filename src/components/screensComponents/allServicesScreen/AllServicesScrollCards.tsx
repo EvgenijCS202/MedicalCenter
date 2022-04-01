@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import HomeAreasList from '../homeScreen/HomeAreasList'
 import ServiceAreaCard from '../../baseComponents/buttons/ServiceAreaCard'

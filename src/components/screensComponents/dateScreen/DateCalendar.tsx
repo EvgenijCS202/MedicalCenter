@@ -1,33 +1,39 @@
 import { StyleSheet, Text, View, Pressable } from 'react-native'
-import React, {useMemo} from 'react'
+import React from 'react'
 import { FlatList } from 'react-native-gesture-handler'
 import {Day, width} from '../../../constants'
 import { startOfDay } from 'date-fns';
-import DateGetDates from './DateGetDates';
 import DateSortedSlotArray from './DateSortedSlotArray';
 import { gray, lightBlue, white } from '../../../constants/colors';
+import { globalStyles } from '../../../constants/globalStyles';
 interface IDateCalendar {
     sel: Date,
     setSel: any,
     dateSlots: Date[]
 }
+type weekDay = {
+    formatted: string,
+    date: Date,
+    key: number,
+  }
 const DateCalendar = ({sel, setSel, dateSlots}:IDateCalendar) => {
     const lastDate = dateSlots[dateSlots.length-1]
-    const data = useMemo(() => DateSortedSlotArray(new Date(), lastDate),[lastDate])
+    const data = DateSortedSlotArray(new Date(), lastDate)
 
-    const circleColor = (date: Date) => { 
-        return sel.valueOf()-date.valueOf()==0?[styles.normalCircle,styles.selCircle]:
-        (startOfDay(new Date()).valueOf()-date.valueOf()==0?[styles.normalCircle,styles.startCircle]:styles.normalCircle)
+    const circleColor = (date: Date): string => { 
+        return sel.valueOf()-date.valueOf()==0?'selected':
+        (startOfDay(new Date()).valueOf()-date.valueOf()==0?'start':'normal')
     }
 
-    const renderWeek = (item: any) => (
-        <View style={{width: width*0.9/7}} key={item.key} >
-            <Text style={styles.dayText}>
+    const renderWeek = (item: weekDay) => (
+        <View style={{width: (width-30)/7}} key={item.key} >
+            <Text style={[styles.dayText,{color: circleColor(item.date)=='selected'?'#373737':'#959595'}]}>
                 {Day(item.key)}
             </Text>
-            <Pressable style={styles.dayNum} onPress={() => 
+            <Pressable style={styles.dayNumContainer} onPress={() => 
             (startOfDay(new Date()).valueOf()-item.date.valueOf()<=0?setSel(item.date):(null))}>
-                <Text style={circleColor(item.date)}>
+                <Text style={[globalStyles.H3,styles.normalCircle,circleColor(item.date)=='selected'?styles.selCircle:{},
+            circleColor(item.date)=='start'?styles.startCircle:{}]}>
                     {item.date.getUTCDate()}
                 </Text>
             </Pressable>
@@ -35,19 +41,16 @@ const DateCalendar = ({sel, setSel, dateSlots}:IDateCalendar) => {
     )
 
   return (
-    <View style={styles.scrollArea}>
+    <View style={styles.container}>
         <FlatList data={data}
         showsHorizontalScrollIndicator={false}
-        renderItem={({item}) => {
-            return (
-                <View style={styles.itemSt}>
-                    {item.week.map(renderWeek)}
-                </View>
-            )
-        }}
+        renderItem={({item}) => (
+            <View style={styles.week} key={item.key}>
+                {item.week.map(renderWeek)}
+            </View>
+            )}
         horizontal
-        pagingEnabled
-        />
+        pagingEnabled/>
     </View>
   )
 }
@@ -55,40 +58,32 @@ const DateCalendar = ({sel, setSel, dateSlots}:IDateCalendar) => {
 export default DateCalendar
 
 const styles = StyleSheet.create({
-    scrollArea: {
-        width: '100%',
-        paddingHorizontal: 20,
-        paddingTop: 20
+    container: {
+        marginHorizontal: 15,
+        marginVertical: 10
     },
-    itemSt: {
-        width: width*0.9,
+    week: {
+        width: width-30,
         flexDirection: 'row'
     },
     dayText: {
         textAlign: 'center',
-        fontSize: 16,
-        color: 'black'
+        fontFamily: 'Manrope-Regular',
+        fontSize: 10,
+        fontWeight: '700'
     },
-    dayNum: {
-        height: width*0.9/7-10,
-        borderRadius: width*0.9/7-10,
-        margin: 5,
-    },
-    dayNumText: {
-        textAlign: 'center',
-        textAlignVertical: 'center',
-        fontSize: 20,
-        color: 'black',
-        borderRadius: width*0.9/7-10,
-        margin: 0,
+    dayNumContainer: {
+        height: (width-30)/7-20,
+        borderRadius: (width-30)/7-20,
+        marginHorizontal: 10,
     },
     normalCircle: {
-        height: width*0.9/7-10,
-        borderRadius: width*0.9/7-10,
         textAlign: 'center',
         textAlignVertical: 'center',
-        fontSize: 20,
-        color: 'black',
+        fontWeight: '700',
+        height: (width-30)/7-20,
+        borderRadius: (width-30)/7-20,
+        color: '#959595',
         backgroundColor: white
     },
     selCircle: {
