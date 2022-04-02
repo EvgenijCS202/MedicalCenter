@@ -1,28 +1,29 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import Icon from '../../../../assets/img/icons/icons'
-import { lightBlue, white } from '../../../constants/colors'
-import { globalStyles } from '../../../constants/globalStyles'
+import {Pressable, StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import Icon from '../../../../assets/img/icons/icons';
+import {lightBlue, white} from '../../../constants/colors';
+import {globalStyles} from '../../../constants/globalStyles';
 interface IBaseHeader {
-    title: string,
-    props: any,
+  title: string;
+  props: any;
 }
 const BaseHeader = ({title, props}: IBaseHeader) => {
   return (
     <View style={styles.container}>
-      <Pressable style={styles.iconContainer} 
-      onPress={ () => props.navigation.goBack()}>
-        <Icon name='vector' color='black' size={16}/>
+      <Pressable
+        style={styles.iconContainer}
+        onPress={() => props.navigation.goBack()}>
+        <Icon name="vector" color="black" size={16} />
       </Pressable>
-      <Text style={[globalStyles.H3,{color: white, paddingRight: 40}]}>
+      <Text style={[globalStyles.H3, {color: white, paddingRight: 40}]}>
         {title}
       </Text>
       <View></View>
     </View>
-  )
-}
+  );
+};
 
-export default BaseHeader
+export default BaseHeader;
 
 const styles = StyleSheet.create({
   container: {
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 16,
-    paddingBottom: 31
+    paddingBottom: 31,
   },
   iconContainer: {
     width: 40,
@@ -39,6 +40,6 @@ const styles = StyleSheet.create({
     backgroundColor: white,
     alignItems: 'center',
     justifyContent: 'space-around',
-    borderRadius: 10
-  }
-})
+    borderRadius: 10,
+  },
+});
