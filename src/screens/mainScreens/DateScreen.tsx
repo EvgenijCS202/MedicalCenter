@@ -1,14 +1,14 @@
 import {addHours, startOfDay} from 'date-fns';
 import React, {useState} from 'react';
 import {View, StyleSheet, Text, Image, ScrollView} from 'react-native';
-import DateCalendar from '../components/screensComponents/dateScreen/DateCalendar';
-import DayTimeButton from '../components/baseComponents/buttons/DayTimeButton';
-import {globalStyles} from '../constants/globalStyles';
-import DateGetDates from '../components/screensComponents/dateScreen/DateGetDates';
-import DateIconMonths from '../components/screensComponents/dateScreen/DateIconMonths';
-import {white} from '../constants/colors';
-import SubmitButton from '../components/baseComponents/buttons/SubmitButton';
-import DateSlotsRender from '../components/screensComponents/dateScreen/DateSlotsRender';
+import DateCalendar from '../../components/screensComponents/dateScreen/DateCalendar';
+import DayTimeButton from '../../components/baseComponents/buttons/DayTimeButton';
+import {globalStyles} from '../../constants/globalStyles';
+import DateGetDates from '../../components/screensComponents/dateScreen/DateGetDates';
+import DateIconMonths from '../../components/screensComponents/dateScreen/DateIconMonths';
+import {white} from '../../constants/colors';
+import SubmitButton from '../../components/baseComponents/buttons/SubmitButton';
+import DateSlotsRender from '../../components/screensComponents/dateScreen/DateSlotsRender';
 interface IDateScreen {
   navigation: any;
   route: {
@@ -85,7 +85,7 @@ export default function DateScreen({navigation, route}: IDateScreen) {
             text={'Вечер'}
           />
         </View>
-        <ScrollView style={styles.scrollSlotsCont}>
+        <ScrollView style={styles.slotsCont}>
           {DateSlotsRender({dateSlots, dateSel, timeSel, setTimeSel, dayTime})}
         </ScrollView>
       </View>
@@ -111,12 +111,12 @@ const styles = StyleSheet.create({
     marginTop: 20,
     justifyContent: 'space-between',
   },
-  scrollSlotsCont: {
-    marginTop: 32,
+  slotsCont: {
+    marginVertical: 26,
     marginHorizontal: 17,
   },
   button: {
-    marginVertical: 38,
+    marginBottom: 20,
     marginHorizontal: 16,
   },
 });

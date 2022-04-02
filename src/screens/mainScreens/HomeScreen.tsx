@@ -1,17 +1,18 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image, Pressable} from 'react-native';
-import {globalStyles} from '../constants/globalStyles';
-import SearchInput from '../components/baseComponents/input/SearchInput';
-import HomeAreasList from '../components/screensComponents/homeScreen/HomeAreasList';
+import {globalStyles} from '../../constants/globalStyles';
+import SearchInput from '../../components/baseComponents/input/SearchInput';
+import HomeAreasList from '../../components/screensComponents/homeScreen/HomeAreasList';
 import {ScrollView} from 'react-native-gesture-handler';
-import ServiceAreaCard from '../components/baseComponents/buttons/ServiceAreaCard';
+import ServiceAreaCard from '../../components/baseComponents/buttons/ServiceAreaCard';
+import {white} from '../../constants/colors';
 
 export default function HomeScreen({navigation}: any) {
   const nickname = 'Евгений';
   return (
-    <View>
+    <ScrollView style={{backgroundColor: white}}>
       <Image
-        source={require('../../assets/img/avatars/avatar.png')}
+        source={require('../../../assets/img/avatars/avatar.png')}
         style={[globalStyles.avatarStyle, {margin: 16}]}
       />
       <Text style={[globalStyles.H1, styles.welcomeText]}>Добрый день,</Text>
@@ -35,7 +36,7 @@ export default function HomeScreen({navigation}: any) {
           <Text style={[globalStyles.Links]}>Все доктора</Text>
         </Pressable>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 

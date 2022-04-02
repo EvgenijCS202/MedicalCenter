@@ -1,7 +1,6 @@
 import {
   StyleSheet,
   Text,
-  ScrollView,
   View,
   Image,
   Pressable,
@@ -47,18 +46,17 @@ const ServiceCards = ({items, navigation}: IServiceCard) => {
       </Pressable>,
     );
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
+    <View style={styles.container}>
       {itemsView}
-    </ScrollView>
+    </View>
   );
 };
 
 export default ServiceCards;
 
 const styles = StyleSheet.create({
-  scrollContainer: {
+  container: {
     marginTop: 24,
-    paddingBottom: 24,
   },
   itemContainer: {
     backgroundColor: white,

@@ -1,11 +1,10 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, ScrollView} from 'react-native';
 import React from 'react';
-import SearchInput from '../components/baseComponents/input/SearchInput';
-import AreaSearchTitle from '../components/screensComponents/areaScreen/AreaSearchTitle';
-import {globalStyles} from '../constants/globalStyles';
-import ServiceCards from '../components/baseComponents/buttons/ServiceCards';
-import {white} from '../constants/colors';
-import {height} from '../constants';
+import SearchInput from '../../components/baseComponents/input/SearchInput';
+import AreaSearchTitle from '../../components/screensComponents/areaScreen/AreaSearchTitle';
+import {globalStyles} from '../../constants/globalStyles';
+import ServiceCards from '../../components/baseComponents/buttons/ServiceCards';
+import {white} from '../../constants/colors';
 interface IAreaScreen {
   route: {
     params: {
@@ -25,14 +24,14 @@ interface IAreaScreen {
 }
 const AreaScreen = ({route, navigation}: IAreaScreen) => {
   return (
-    <View style={{backgroundColor: white, height: height - 160}}>
+    <ScrollView style={{backgroundColor: white}}>
       <SearchInput
         style={styles.search}
         text={'Поиск по ' + AreaSearchTitle(route.params.title)}
       />
       <Text style={[globalStyles.H1, {marginHorizontal: 17}]}>Услуги</Text>
       {ServiceCards({items: route.params.services, navigation})}
-    </View>
+    </ScrollView>
   );
 };
 

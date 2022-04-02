@@ -33,7 +33,7 @@ export default TimeSlotButton;
 
 const styles = StyleSheet.create({
   slotsCont: {
-    marginBottom: 12,
+    marginVertical: 6,
     width: (width - 74) / 3,
     height: 40,
     borderRadius: 9,

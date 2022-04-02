@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, Image, Text, StyleSheet} from 'react-native';
-import {globalStyles} from '../constants/globalStyles';
-import {height, width} from '../constants';
-import {white} from '../constants/colors';
-import DescriptionCard from '../components/baseComponents/buttons/DescriptionCard';
-import SubmitButton from '../components/baseComponents/buttons/SubmitButton';
+import {globalStyles} from '../../constants/globalStyles';
+import {height, width} from '../../constants';
+import {white} from '../../constants/colors';
+import DescriptionCard from '../../components/baseComponents/buttons/DescriptionCard';
+import SubmitButton from '../../components/baseComponents/buttons/SubmitButton';
 interface IServiceScreen {
   navigation: any;
   route: {
@@ -23,7 +23,7 @@ interface IServiceScreen {
 }
 export default function ServiceScreen({navigation, route}: IServiceScreen) {
   return (
-    <View style={{backgroundColor: white, height: height - 160}}>
+    <View style={{backgroundColor: white, height: '100%'}}>
       <View style={{flex: 1}}>
         <View style={{flexDirection: 'row', marginVertical: 24}}>
           <Image
@@ -83,6 +83,6 @@ const styles = StyleSheet.create({
   },
   button: {
     marginHorizontal: 16,
-    marginBottom: 38,
+    marginBottom: 20,
   },
 });
