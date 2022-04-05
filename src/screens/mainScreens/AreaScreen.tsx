@@ -11,11 +11,11 @@ interface IAreaScreen {
       services: {
         name: string;
         description: String;
-        imgSource: string;
-        time: string;
-        age: string;
+        image: string;
+        info1: string;
+        info2: string;
+        info3: string;
         price: number;
-        conclusionTime: string;
       }[];
       title: string;
     };

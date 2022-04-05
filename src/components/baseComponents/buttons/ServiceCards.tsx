@@ -1,10 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  Pressable,
-} from 'react-native';
+import {StyleSheet, Text, View, Image, Pressable} from 'react-native';
 import React from 'react';
 import {white} from '../../../constants/colors';
 import {globalStyles} from '../../../constants/globalStyles';
@@ -12,11 +6,11 @@ interface IServiceCard {
   items: {
     name: string;
     description: String;
-    imgSource: any;
-    time: string;
-    age: string;
+    image: any;
+    info1: string;
+    info2: string;
+    info3: string;
     price: number;
-    conclusionTime: string;
   }[];
   navigation: any;
 }
@@ -28,13 +22,13 @@ const ServiceCards = ({items, navigation}: IServiceCard) => {
         style={styles.itemContainer}
         key={i}
         onPress={() => navigation.navigate('Service', {data: items[i]})}>
-        <Image style={{margin: 10}} source={items[i].imgSource} />
+        <Image style={{margin: 10}} source={items[i].image} />
         <View style={{flex: 1, margin: 10, justifyContent: 'space-between'}}>
           <View>
             <Text style={[globalStyles.H4, {marginTop: 12}]}>
               {items[i].name}
             </Text>
-            <Text style={globalStyles.Captures}>{items[i].time}</Text>
+            <Text style={globalStyles.Captures}>{items[i].info1}</Text>
           </View>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <Text style={[globalStyles.smallText, {fontWeight: '700'}]}>
@@ -45,11 +39,7 @@ const ServiceCards = ({items, navigation}: IServiceCard) => {
         </View>
       </Pressable>,
     );
-  return (
-    <View style={styles.container}>
-      {itemsView}
-    </View>
-  );
+  return <View style={styles.container}>{itemsView}</View>;
 };
 
 export default ServiceCards;

@@ -10,13 +10,14 @@ interface IServiceScreen {
   route: {
     params: {
       data: {
+        type: 'service';
         name: string;
         description: String;
-        imgSource: any;
-        time: string;
-        age: string;
+        image: any;
+        info1: string;
+        info2: string;
+        info3: string;
         price: number;
-        conclusionTime: string;
       };
     };
   };
@@ -28,7 +29,7 @@ export default function ServiceScreen({navigation, route}: IServiceScreen) {
         <View style={{flexDirection: 'row', marginVertical: 24}}>
           <Image
             style={{width: 60, height: 60, marginHorizontal: 16}}
-            source={route.params.data.imgSource}
+            source={route.params.data.image}
           />
           <Text
             style={[
@@ -44,17 +45,17 @@ export default function ServiceScreen({navigation, route}: IServiceScreen) {
         <View style={styles.descCards}>
           <DescriptionCard
             title="Длительность обследования"
-            text={route.params.data.time}
+            text={route.params.data.info1}
             size={{width: (width - 48) / 3, height: (width - 48) / 3}}
           />
           <DescriptionCard
             title="Подготовка заключения"
-            text={route.params.data.conclusionTime}
+            text={route.params.data.info2}
             size={{width: (width - 48) / 3, height: (width - 48) / 3}}
           />
           <DescriptionCard
             title="Возраст"
-            text={route.params.data.age}
+            text={route.params.data.info3}
             size={{width: (width - 48) / 3, height: (width - 48) / 3}}
           />
         </View>

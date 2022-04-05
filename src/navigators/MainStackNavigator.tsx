@@ -6,6 +6,8 @@ import AreaScreen from '../screens/mainScreens/AreaScreen';
 import ServiceScreen from '../screens/mainScreens/ServiceScreen';
 import BaseHeader from '../components/baseComponents/header/BaseHeader';
 import DateScreen from '../screens/mainScreens/DateScreen';
+import AllDoctorsScreen from '../screens/mainScreens/AllDoctorsScreen';
+import DoctorScreen from '../screens/mainScreens/DoctorScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +40,19 @@ export default function MainStackNavigator() {
         component={ServiceScreen}
         options={{
           header: props => <BaseHeader title="Услуга" props={props} />,
+        }}
+      />
+      <Stack.Screen name="AllDoctors"
+        component={AllDoctorsScreen}
+        options={{
+          header: props => <BaseHeader title={'Все врачи'} props={props} />,
+        }}
+      />
+      <Stack.Screen
+        name="Doctor"
+        component={DoctorScreen}
+        options={{
+          header: props => <BaseHeader title="Врач" props={props} />,
         }}
       />
       <Stack.Screen

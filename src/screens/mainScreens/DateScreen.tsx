@@ -16,11 +16,11 @@ interface IDateScreen {
       data: {
         name: string;
         description: String;
-        imgSource: any;
-        time: string;
-        age: string;
+        image: any;
+        info1: string;
+        info2: string;
+        info3: string;
         price: number;
-        conclusionTime: string;
       };
     };
   };
@@ -47,7 +47,7 @@ export default function DateScreen({navigation, route}: IDateScreen) {
         <View style={{flexDirection: 'row', marginVertical: 24}}>
           <Image
             style={{width: 60, height: 60, marginHorizontal: 16}}
-            source={route.params.data.imgSource}
+            source={route.params.data.image}
           />
           <Text
             style={[

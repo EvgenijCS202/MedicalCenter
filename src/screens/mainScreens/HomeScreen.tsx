@@ -6,6 +6,7 @@ import HomeAreasList from '../../components/screensComponents/homeScreen/HomeAre
 import {ScrollView} from 'react-native-gesture-handler';
 import ServiceAreaCard from '../../components/baseComponents/buttons/ServiceAreaCard';
 import {white} from '../../constants/colors';
+import HomeDoctorRender from '../../components/screensComponents/homeScreen/HomeDoctorRender';
 
 export default function HomeScreen({navigation}: any) {
   const nickname = 'Евгений';
@@ -32,10 +33,11 @@ export default function HomeScreen({navigation}: any) {
       </ScrollView>
       <View style={[styles.Links]}>
         <Text style={globalStyles.H3}>Топ докторов</Text>
-        <Pressable>
+        <Pressable onPress={() => navigation.navigate('AllDoctors')}>
           <Text style={[globalStyles.Links]}>Все доктора</Text>
         </Pressable>
       </View>
+      <View style={styles.doctors}>{HomeDoctorRender({navigation})}</View>
     </ScrollView>
   );
 }
@@ -63,5 +65,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 17,
     marginVertical: 24,
     paddingBottom: 10,
+  },
+  doctors: {
+    marginLeft: 17,
+    marginRight: 15,
+    marginTop: 24,
   },
 });

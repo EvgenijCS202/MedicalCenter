@@ -19,11 +19,9 @@ const DateSlotsRender = ({
 }: IDateSlotsRender) => {
   const timeArr = DateGetTime({dateSlots, dateSel, dayTime});
   const itemArr = [];
-  console.log(timeArr.length);
   for (let i = 0; i < timeArr.length; i += 3) {
     const rem = timeArr.length - i - 3 > 0 ? 0 : timeArr.length % 3;
     const check = rem == 0 ? 2 : rem - 1;
-    console.log(+i + ' ' + check);
     itemArr.push(
       <View key={i / 3} style={styles.slotsCont}>
         <TimeSlotButton

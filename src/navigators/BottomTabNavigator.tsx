@@ -4,7 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MainStackNavigator from './MainStackNavigator';
 import ProfileScreen from '../screens/profileScreens/ProfileScreen';
 import IconsBottomTabNavigation from '../components/baseComponents/footer/IconsBottomTabNavigation';
-import AppoitmentScreen from '../screens/appoitmentsScreens/appoitmentScreen';
+import AppointmentScreen from '../screens/appointmentsScreens/AppointmentScreen';
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
@@ -25,8 +25,8 @@ const BottomTabNavigator = () => {
           }}
         />
         <Tab.Screen
-          name="Appoitments"
-          component={AppoitmentScreen}
+          name="Appointments"
+          component={AppointmentScreen}
           options={{
             tabBarIcon: ({focused}) =>
               IconsBottomTabNavigation({
