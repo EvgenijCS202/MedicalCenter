@@ -8,6 +8,7 @@ import BaseHeader from '../components/baseComponents/header/BaseHeader';
 import DateScreen from '../screens/mainScreens/DateScreen';
 import AllDoctorsScreen from '../screens/mainScreens/AllDoctorsScreen';
 import DoctorScreen from '../screens/mainScreens/DoctorScreen';
+import StatusScreen from '../screens/mainScreens/StatusScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -42,7 +43,8 @@ export default function MainStackNavigator() {
           header: props => <BaseHeader title="Услуга" props={props} />,
         }}
       />
-      <Stack.Screen name="AllDoctors"
+      <Stack.Screen
+        name="AllDoctors"
         component={AllDoctorsScreen}
         options={{
           header: props => <BaseHeader title={'Все врачи'} props={props} />,
@@ -60,6 +62,20 @@ export default function MainStackNavigator() {
         component={DateScreen}
         options={{
           header: props => <BaseHeader title="Запись" props={props} />,
+        }}
+      />
+      <Stack.Screen
+        name="Status"
+        component={StatusScreen}
+        options={{
+          header: (props: any) => (
+            <BaseHeader
+              title="Запись"
+              props={props}
+              color={props.route.params.color}
+              onPress={props.route.params.onPress}
+            />
+          ),
         }}
       />
     </Stack.Navigator>

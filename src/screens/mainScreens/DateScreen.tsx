@@ -1,6 +1,6 @@
 import {addHours, startOfDay} from 'date-fns';
 import React, {useState} from 'react';
-import {View, StyleSheet, Text, Image, ScrollView} from 'react-native';
+import {View, StyleSheet, Text, ScrollView} from 'react-native';
 import DateCalendar from '../../components/screensComponents/dateScreen/DateCalendar';
 import DayTimeButton from '../../components/baseComponents/buttons/DayTimeButton';
 import {globalStyles} from '../../constants/globalStyles';
@@ -9,19 +9,14 @@ import DateIconMonths from '../../components/screensComponents/dateScreen/DateIc
 import {white} from '../../constants/colors';
 import SubmitButton from '../../components/baseComponents/buttons/SubmitButton';
 import DateSlotsRender from '../../components/screensComponents/dateScreen/DateSlotsRender';
+import Appointment from '../../components/baseComponents/appointments/Appointment';
+import DateTitle from '../../components/screensComponents/dateScreen/DateTitle';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 interface IDateScreen {
   navigation: any;
   route: {
     params: {
-      data: {
-        name: string;
-        description: String;
-        image: any;
-        info1: string;
-        info2: string;
-        info3: string;
-        price: number;
-      };
+      data: Appointment;
     };
   };
 }
@@ -44,54 +39,69 @@ export default function DateScreen({navigation, route}: IDateScreen) {
   return (
     <View style={{backgroundColor: white, height: '100%'}}>
       <View style={{flex: 1}}>
-        <View style={{flexDirection: 'row', marginVertical: 24}}>
-          <Image
-            style={{width: 60, height: 60, marginHorizontal: 16}}
-            source={route.params.data.image}
+        <DateTitle data={route.params.data} />
+        <ScrollView>
+          <View style={styles.title2}>
+            <Text style={globalStyles.H3}>Выберите время</Text>
+            <DateIconMonths dates={dateSlots} />
+          </View>
+          <DateCalendar
+            sel={dateSel}
+            setSel={setDateSel}
+            dateSlots={dateSlots}
           />
-          <Text
-            style={[
-              globalStyles.H2,
-              {textAlignVertical: 'center', marginHorizontal: 10},
-            ]}>
-            {route.params.data.name}
-          </Text>
-        </View>
-        <View style={styles.title2}>
-          <Text style={globalStyles.H3}>Выберите время</Text>
-          <DateIconMonths dates={dateSlots} />
-        </View>
-        <DateCalendar sel={dateSel} setSel={setDateSel} dateSlots={dateSlots} />
-        <View style={styles.DayTimeCont}>
-          <DayTimeButton
-            dayTime={dayTime}
-            dayTimeState={1}
-            setDayTime={() => setDayTime(1)}
-            iconName={'sunrise'}
-            text={'Утро'}
-          />
-          <DayTimeButton
-            dayTime={dayTime}
-            dayTimeState={2}
-            setDayTime={() => setDayTime(2)}
-            iconName={'sunny_day'}
-            text={'День'}
-          />
-          <DayTimeButton
-            dayTime={dayTime}
-            dayTimeState={3}
-            setDayTime={() => setDayTime(3)}
-            iconName={'moon'}
-            text={'Вечер'}
-          />
-        </View>
-        <ScrollView style={styles.slotsCont}>
-          {DateSlotsRender({dateSlots, dateSel, timeSel, setTimeSel, dayTime})}
+          <View style={styles.DayTimeCont}>
+            <DayTimeButton
+              dayTime={dayTime}
+              dayTimeState={1}
+              setDayTime={() => setDayTime(1)}
+              iconName={'sunrise'}
+              text={'Утро'}
+            />
+            <DayTimeButton
+              dayTime={dayTime}
+              dayTimeState={2}
+              setDayTime={() => setDayTime(2)}
+              iconName={'sunny_day'}
+              text={'День'}
+            />
+            <DayTimeButton
+              dayTime={dayTime}
+              dayTimeState={3}
+              setDayTime={() => setDayTime(3)}
+              iconName={'moon'}
+              text={'Вечер'}
+            />
+          </View>
+          <View style={styles.slotsCont}>
+            {DateSlotsRender({
+              dateSlots,
+              dateSel,
+              timeSel,
+              setTimeSel,
+              dayTime,
+            })}
+          </View>
         </ScrollView>
       </View>
       <SubmitButton
         text="Записаться"
-        onPress={() => navigation.navigate('Home')}
+        onPress={async () => {
+          const appointment = new Appointment(route.params.data)
+          appointment.date=timeSel
+          try {
+            const jsonValue = JSON.stringify(appointment);
+            // throw Error;
+            await AsyncStorage.setItem('@appointments', jsonValue, error => {
+              if (error == null)
+                navigation.navigate('Status', {color: '#32C000', appointment, onPress: () => navigation.navigate('Home')});
+              else
+                navigation.navigate('Status', {color: '#EC7A76', appointment, onPress: () => navigation.navigate('Home')});
+            });
+          } catch (error) {
+            navigation.navigate('Status', {color: '#EC7A76', appointment, onPress: () => navigation.navigate('Home')});
+          }
+        }}
         style={styles.button}
       />
     </View>

@@ -7,6 +7,7 @@ interface IAppointment {
   info1: string;
   info2: string;
   info3: string;
+  date?: Date;
   sumRates?: number;
   numRates?: number;
   doctorName?: string;
@@ -22,6 +23,7 @@ export default class Appointment {
   info1: string;
   info2: string;
   info3: string;
+  status: 'noStatus' | 'confirmed' | 'canceled' | 'outdated';
   date?: Date;
   sumRates?: number;
   numRates?: number;
@@ -37,6 +39,7 @@ export default class Appointment {
     info1,
     info2,
     info3,
+    date,
     sumRates,
     numRates,
     doctorName,
@@ -51,6 +54,8 @@ export default class Appointment {
     this.info1 = info1;
     this.info2 = info2;
     this.info3 = info3;
+    this.status = 'noStatus';
+    if (date != null) this.date = date;
     if (type === 'doctor') {
       this.sumRates = sumRates;
       this.numRates = numRates;
@@ -58,5 +63,8 @@ export default class Appointment {
       this.doctorSurname = doctorSurname;
       this.doctorMiddleName = doctorMiddleName;
     }
+  }
+  setDate(date: Date) {
+    this.date = date;
   }
 }

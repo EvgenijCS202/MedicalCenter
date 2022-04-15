@@ -1,24 +1,17 @@
 import React from 'react';
-import {View, Image, Text, StyleSheet} from 'react-native';
+import {View, ScrollView, Text, StyleSheet} from 'react-native';
 import {globalStyles} from '../../constants/globalStyles';
-import {height, width} from '../../constants';
+import {width} from '../../constants';
 import {white} from '../../constants/colors';
 import DescriptionCard from '../../components/baseComponents/buttons/DescriptionCard';
 import SubmitButton from '../../components/baseComponents/buttons/SubmitButton';
+import Appointment from '../../components/baseComponents/appointments/Appointment';
+import DateTitle from '../../components/screensComponents/dateScreen/DateTitle';
 interface IServiceScreen {
   navigation: any;
   route: {
     params: {
-      data: {
-        type: 'service';
-        name: string;
-        description: String;
-        image: any;
-        info1: string;
-        info2: string;
-        info3: string;
-        price: number;
-      };
+      data: Appointment;
     };
   };
 }
@@ -26,19 +19,7 @@ export default function ServiceScreen({navigation, route}: IServiceScreen) {
   return (
     <View style={{backgroundColor: white, height: '100%'}}>
       <View style={{flex: 1}}>
-        <View style={{flexDirection: 'row', marginVertical: 24}}>
-          <Image
-            style={{width: 60, height: 60, marginHorizontal: 16}}
-            source={route.params.data.image}
-          />
-          <Text
-            style={[
-              globalStyles.H2,
-              {textAlignVertical: 'center', marginHorizontal: 10},
-            ]}>
-            {route.params.data.name}
-          </Text>
-        </View>
+        <DateTitle data={route.params.data} />
         <Text style={[globalStyles.text, styles.description]}>
           {route.params.data.description}
         </Text>
@@ -84,6 +65,6 @@ const styles = StyleSheet.create({
   },
   button: {
     marginHorizontal: 16,
-    marginBottom: 20,
+    marginVertical: 20,
   },
 });

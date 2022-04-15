@@ -3,14 +3,15 @@ import React from 'react';
 import Appointment from '../appointments/Appointment';
 import Stars from '../Stars';
 import {globalStyles} from '../../../constants/globalStyles';
+import { white } from '../../../constants/colors';
 interface IDoctorCard {
   doctor: Appointment;
-  key: number;
+  num: number;
   navigation: any;
 }
-const DoctorCard = ({doctor, key, navigation}: IDoctorCard) => {
+const DoctorCard = ({doctor, num, navigation}: IDoctorCard) => {
   return (
-    <Pressable style={styles.container} key={key} onPress={() => navigation.navigate('Doctor',{doctor})} >
+    <Pressable style={styles.container} key={num} onPress={() => navigation.navigate('Doctor',{doctor})} >
       <Image source={doctor.image} style={styles.image} />
       <View style={styles.info}>
         <View>
@@ -32,7 +33,11 @@ export default DoctorCard;
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: white,
+    marginBottom: 12,
+    borderRadius: 10,
     flexDirection: 'row',
+    elevation: 2,
   },
   image: {
     width: 100,

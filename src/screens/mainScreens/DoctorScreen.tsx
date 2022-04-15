@@ -7,6 +7,7 @@ import DescriptionCard from '../../components/baseComponents/buttons/Description
 import {width} from '../../constants';
 import SubmitButton from '../../components/baseComponents/buttons/SubmitButton';
 import Stars from '../../components/baseComponents/Stars';
+import DateTitle from '../../components/screensComponents/dateScreen/DateTitle';
 interface IDoctorScreen {
   route: {
     params: {
@@ -19,34 +20,7 @@ const DoctorScreen = ({route, navigation}: IDoctorScreen) => {
   return (
     <View style={{backgroundColor: white, height: '100%'}}>
       <View style={{flex: 1}}>
-        <View style={{flexDirection: 'row', marginVertical: 24}}>
-          <Image
-            style={{width: 100, height: 100, marginHorizontal: 16}}
-            source={route.params.doctor.image}
-          />
-          <View style={{justifyContent: 'center'}}>
-            <Stars
-              sumRates={
-                typeof route.params.doctor.sumRates === 'number'
-                  ? route.params.doctor.sumRates
-                  : 0
-              }
-              numRates={
-                typeof route.params.doctor.numRates === 'number'
-                  ? route.params.doctor.numRates
-                  : 1
-              }
-            />
-            <Text style={globalStyles.H2}>
-              {route.params.doctor.doctorSurname}{' '}
-              {route.params.doctor.doctorName?.charAt(0)}.{' '}
-              {route.params.doctor.doctorMiddleName?.charAt(0)}.
-            </Text>
-            <Text style={globalStyles.Captures}>
-              {route.params.doctor.name}
-            </Text>
-          </View>
-        </View>
+        <DateTitle data={route.params.doctor} />
         <Text style={[globalStyles.text, styles.description]}>
           {route.params.doctor.description}
         </Text>
