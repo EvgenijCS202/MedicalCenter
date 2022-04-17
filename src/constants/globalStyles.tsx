@@ -11,23 +11,23 @@ export const globalStyles = StyleSheet.create({
   H1: {
     fontFamily: 'Manrope-Regular',
     fontSize: 28,
-    color: '#404040',
+    color: '#000000',
   },
   H1B: {
     fontFamily: 'Manrope-Regular',
     fontWeight: '700',
     fontSize: 28,
-    color: '#404040',
+    color: '#000000',
   },
   H2: {
     fontFamily: 'Manrope-SemiBold',
     fontSize: 24,
-    color: '#404040',
+    color: '#000000',
   },
   H3: {
     fontFamily: 'Manrope-SemiBold',
     fontSize: 18,
-    color: '#404040',
+    color: '#000000',
   },
   H4: {
     fontFamily: 'Manrope-SemiBold',

@@ -1,18 +1,10 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, Image, Pressable} from 'react-native';
+import {View, Text, StyleSheet, Image} from 'react-native';
 import {globalStyles} from '../../constants/globalStyles';
 import SearchInput from '../../components/baseComponents/input/SearchInput';
-import HomeAreasList from '../../components/screensComponents/homeScreen/HomeAreasList';
 import {ScrollView} from 'react-native-gesture-handler';
-import ServiceAreaCard from '../../components/baseComponents/buttons/ServiceAreaCard';
 import {white} from '../../constants/colors';
-import HomeDoctorRender from '../../components/screensComponents/homeScreen/HomeDoctorRender';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import HomeServicesList from '../../components/screensComponents/homeScreen/HomeServicesList';
-import Appointment from '../../components/baseComponents/appointments/Appointment';
-import HomeDoctorsList from '../../components/screensComponents/homeScreen/HomeDoctorsList';
-import ServiceCard from '../../components/baseComponents/buttons/ServiceCard';
-import DoctorCard from '../../components/baseComponents/buttons/DoctorCard';
 import HomeFooter from '../../components/screensComponents/homeScreen/HomeFooter';
 
 export default function HomeScreen({navigation}: any) {

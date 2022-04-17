@@ -1,15 +1,33 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import Appointment from '../appointments/Appointment';
 import {globalStyles} from '../../../constants/globalStyles';
 import Icons from '../../../../assets/img/icons/icons';
-import {gray, white} from '../../../constants/colors';
-import {getDate, getHours, getMinutes, getMonth, getYear} from 'date-fns';
+import {gray, lightBlue, white} from '../../../constants/colors';
+import {
+  getDate,
+  getHours,
+  getMinutes,
+  getMonth,
+  getYear,
+  parseISO,
+} from 'date-fns';
 import {twoSignNum} from '../../../constants';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 interface IAppointmentCard {
   appointment: Appointment;
+  style?: any;
+  cancel?: any;
+  retry?: any;
+  result?: any;
 }
-const AppointmentCard = ({appointment}: IAppointmentCard) => {
+const AppointmentCard = ({
+  appointment,
+  style,
+  cancel,
+  retry,
+  result,
+}: IAppointmentCard) => {
   const getName = () => {
     if (appointment.type === 'service') return appointment.name;
     else
@@ -23,7 +41,11 @@ const AppointmentCard = ({appointment}: IAppointmentCard) => {
       );
   };
   const date = () =>
-    appointment.date != undefined ? appointment.date : new Date();
+    appointment.date != undefined
+      ? typeof appointment.date === 'string'
+        ? parseISO(appointment.date)
+        : appointment.date
+      : new Date();
   const statusColor = () => {
     switch (appointment.status) {
       case 'confirmed':
@@ -46,8 +68,32 @@ const AppointmentCard = ({appointment}: IAppointmentCard) => {
         return 'Ошибка';
     }
   };
+  let buttons = <View></View>;
+  if (retry != undefined) {
+    if (cancel != undefined)
+      buttons = (
+        <View style={styles.upcomingContainer}>
+          <Pressable style={styles.cancelButton} onPress={cancel}>
+            <Text style={[globalStyles.H5, {color: white}]}>Отмена</Text>
+          </Pressable>
+          <Pressable style={styles.upcomingRetry} onPress={retry}>
+            <Text style={[globalStyles.H5, {color: white}]}>
+              Перезаписаться
+            </Text>
+          </Pressable>
+        </View>
+      );
+    else
+      buttons = (
+        <Pressable style={styles.canceledRetry} onPress={retry}>
+          <Text style={[globalStyles.H5, {color: white}]}>
+            Повторная запись
+          </Text>
+        </Pressable>
+      );
+  }
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <View style={styles.header}>
         <View>
           <Text style={[globalStyles.H4, {lineHeight: 22}]}>{getName()}</Text>
@@ -87,6 +133,7 @@ const AppointmentCard = ({appointment}: IAppointmentCard) => {
           </Text>
         </View>
       </View>
+      {buttons}
     </View>
   );
 };
@@ -99,7 +146,6 @@ const styles = StyleSheet.create({
     elevation: 2,
     backgroundColor: white,
     borderRadius: 20,
-    marginHorizontal: 16,
   },
   header: {
     flexDirection: 'row',
@@ -125,5 +171,34 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 4,
+  },
+  upcomingContainer: {
+    flexDirection: 'row',
+    marginTop: 5,
+    marginBottom: 20,
+    justifyContent: 'space-between',
+  },
+  cancelButton: {
+    paddingHorizontal: 40,
+    backgroundColor: gray,
+    height: 40,
+    justifyContent: 'center',
+    borderRadius: 10,
+  },
+  upcomingRetry: {
+    paddingHorizontal: 23,
+    backgroundColor: lightBlue,
+    height: 40,
+    justifyContent: 'center',
+    borderRadius: 10,
+  },
+  canceledRetry: {
+    marginTop: 5,
+    marginBottom: 20,
+    backgroundColor: lightBlue,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
   },
 });

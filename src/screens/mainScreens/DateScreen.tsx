@@ -7,16 +7,16 @@ import {globalStyles} from '../../constants/globalStyles';
 import DateGetDates from '../../components/screensComponents/dateScreen/DateGetDates';
 import DateIconMonths from '../../components/screensComponents/dateScreen/DateIconMonths';
 import {white} from '../../constants/colors';
-import SubmitButton from '../../components/baseComponents/buttons/SubmitButton';
 import DateSlotsRender from '../../components/screensComponents/dateScreen/DateSlotsRender';
 import Appointment from '../../components/baseComponents/appointments/Appointment';
 import DateTitle from '../../components/screensComponents/dateScreen/DateTitle';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import DateButton from '../../components/screensComponents/dateScreen/DateButton';
 interface IDateScreen {
   navigation: any;
   route: {
     params: {
       data: Appointment;
+      allAppointments?: Appointment[]
     };
   };
 }
@@ -84,25 +84,11 @@ export default function DateScreen({navigation, route}: IDateScreen) {
           </View>
         </ScrollView>
       </View>
-      <SubmitButton
-        text="Записаться"
-        onPress={async () => {
-          const appointment = new Appointment(route.params.data)
-          appointment.date=timeSel
-          try {
-            const jsonValue = JSON.stringify(appointment);
-            // throw Error;
-            await AsyncStorage.setItem('@appointments', jsonValue, error => {
-              if (error == null)
-                navigation.navigate('Status', {color: '#32C000', appointment, onPress: () => navigation.navigate('Home')});
-              else
-                navigation.navigate('Status', {color: '#EC7A76', appointment, onPress: () => navigation.navigate('Home')});
-            });
-          } catch (error) {
-            navigation.navigate('Status', {color: '#EC7A76', appointment, onPress: () => navigation.navigate('Home')});
-          }
-        }}
-        style={styles.button}
+      <DateButton
+        navigation={navigation}
+        timeSel={timeSel}
+        data={route.params.data}
+        allAppointmentsOld={route.params.allAppointments}
       />
     </View>
   );
@@ -124,9 +110,5 @@ const styles = StyleSheet.create({
   slotsCont: {
     marginVertical: 26,
     marginHorizontal: 17,
-  },
-  button: {
-    marginBottom: 20,
-    marginHorizontal: 16,
   },
 });
