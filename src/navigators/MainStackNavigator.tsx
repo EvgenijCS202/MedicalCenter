@@ -9,10 +9,11 @@ import DateScreen from '../screens/mainScreens/DateScreen';
 import AllDoctorsScreen from '../screens/mainScreens/AllDoctorsScreen';
 import DoctorScreen from '../screens/mainScreens/DoctorScreen';
 import StatusScreen from '../screens/mainScreens/StatusScreen';
+import ResultScreen from '../screens/mainScreens/ResultScreen';
 
 const Stack = createNativeStackNavigator();
 
-export default function MainStackNavigator() {
+export default function MainStackNavigator({navigation}: any) {
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -74,6 +75,19 @@ export default function MainStackNavigator() {
               props={props}
               color={props.route.params.color}
               onPress={props.route.params.onPress}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="Result"
+        component={ResultScreen}
+        options={{
+          header: props => (
+            <BaseHeader
+              title="Результат"
+              props={props}
+              onPress={() => navigation.navigate('Home')}
             />
           ),
         }}

@@ -32,12 +32,12 @@ export const globalStyles = StyleSheet.create({
   H4: {
     fontFamily: 'Manrope-SemiBold',
     fontSize: 14,
-    color: '#404040',
+    color: '#000000',
   },
   H5: {
     fontFamily: 'Manrope-SemiBold',
     fontSize: 12,
-    color: '#404040',
+    color: '#000000',
   },
   Links: {
     fontFamily: 'Manrope-Medium',
@@ -52,11 +52,16 @@ export const globalStyles = StyleSheet.create({
   text: {
     fontFamily: 'Manrope-Regular',
     fontSize: 14,
-    color: '#404040',
+    color: '#000000',
   },
   smallText: {
     fontFamily: 'Manrope-Regular',
     fontSize: 12,
-    color: '#404040',
+    color: '#000000',
+  },
+  unActiveText: {
+    fontFamily: 'Manrope-Regular',
+    fontSize: 12,
+    color: '#B8B8B8',
   },
 });

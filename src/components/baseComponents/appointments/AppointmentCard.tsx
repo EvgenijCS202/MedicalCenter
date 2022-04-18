@@ -13,7 +13,6 @@ import {
   parseISO,
 } from 'date-fns';
 import {twoSignNum} from '../../../constants';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 interface IAppointmentCard {
   appointment: Appointment;
   style?: any;
@@ -72,11 +71,11 @@ const AppointmentCard = ({
   if (retry != undefined) {
     if (cancel != undefined)
       buttons = (
-        <View style={styles.upcomingContainer}>
-          <Pressable style={styles.cancelButton} onPress={cancel}>
+        <View style={styles.twoButtons}>
+          <Pressable style={styles.leftButton} onPress={cancel}>
             <Text style={[globalStyles.H5, {color: white}]}>Отмена</Text>
           </Pressable>
-          <Pressable style={styles.upcomingRetry} onPress={retry}>
+          <Pressable style={styles.rightButton} onPress={retry}>
             <Text style={[globalStyles.H5, {color: white}]}>
               Перезаписаться
             </Text>
@@ -85,13 +84,21 @@ const AppointmentCard = ({
       );
     else
       buttons = (
-        <Pressable style={styles.canceledRetry} onPress={retry}>
+        <Pressable style={styles.oneButton} onPress={retry}>
           <Text style={[globalStyles.H5, {color: white}]}>
             Повторная запись
           </Text>
         </Pressable>
       );
-  }
+  } else if (result != undefined)
+    buttons = (
+      <Pressable style={styles.oneButton} onPress={result}>
+        <Text style={[globalStyles.H5, {color: white}]}>
+          Посмотреть результат
+        </Text>
+      </Pressable>
+    );
+
   return (
     <View style={[styles.container, style]}>
       <View style={styles.header}>
@@ -172,27 +179,27 @@ const styles = StyleSheet.create({
     height: 8,
     borderRadius: 4,
   },
-  upcomingContainer: {
+  twoButtons: {
     flexDirection: 'row',
     marginTop: 5,
     marginBottom: 20,
     justifyContent: 'space-between',
   },
-  cancelButton: {
+  leftButton: {
     paddingHorizontal: 40,
     backgroundColor: gray,
     height: 40,
     justifyContent: 'center',
     borderRadius: 10,
   },
-  upcomingRetry: {
+  rightButton: {
     paddingHorizontal: 23,
     backgroundColor: lightBlue,
     height: 40,
     justifyContent: 'center',
     borderRadius: 10,
   },
-  canceledRetry: {
+  oneButton: {
     marginTop: 5,
     marginBottom: 20,
     backgroundColor: lightBlue,

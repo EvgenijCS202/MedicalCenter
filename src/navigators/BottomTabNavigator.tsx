@@ -2,9 +2,9 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MainStackNavigator from './MainStackNavigator';
-import ProfileScreen from '../screens/profileScreens/ProfileScreen';
 import IconsBottomTabNavigation from '../components/baseComponents/footer/IconsBottomTabNavigation';
 import AppointmentScreen from '../screens/appointmentsScreens/AppointmentScreen';
+import ProfileStackNavigator from './ProfileStackNavigator';
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
@@ -38,7 +38,7 @@ const BottomTabNavigator = () => {
         />
         <Tab.Screen
           name="Profile"
-          component={ProfileScreen}
+          component={ProfileStackNavigator}
           options={{
             tabBarIcon: ({focused}) =>
               IconsBottomTabNavigation({

@@ -56,21 +56,17 @@ const DateButton = ({
           return;
         }
         if (allAppointmentsOld != undefined) {
-          console.log(allAppointments)
-          console.log(data)
           for (let i = 0; i < allAppointments.length; ++i)
             if (
               allAppointments[i].name == data.name &&
               allAppointments[i].date == data.date &&
               allAppointments[i].status == data.status
             ) {
-              console.log('Here')
               allAppointments[i].date = appointment.date;
               break;
             }
         } else allAppointments.push(appointment);
         try {
-          // console.log(allAppointments);
           const value = JSON.stringify(allAppointments);
           // throw Error;
           await AsyncStorage.setItem('@appointments', value, error => {

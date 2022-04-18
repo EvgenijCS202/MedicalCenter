@@ -19,7 +19,7 @@ const AppointmentScreen = ({navigation}: any) => {
         AppointmentUpcoming(setAppointments, navigation, renderScreen);
         break;
       case 1:
-        AppointmentOutdated(setAppointments);
+        AppointmentOutdated(setAppointments, navigation);
         break;
       case 2:
         AppointmentCanceled(setAppointments, navigation);
