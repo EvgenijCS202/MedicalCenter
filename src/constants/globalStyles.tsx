@@ -59,4 +59,9 @@ export const globalStyles = StyleSheet.create({
     fontSize: 12,
     color: '#000000',
   },
+  unActiveText: {
+    fontFamily: 'Manrope-Regular',
+    fontSize: 12,
+    color: '#B8B8B8',
+  },
 });

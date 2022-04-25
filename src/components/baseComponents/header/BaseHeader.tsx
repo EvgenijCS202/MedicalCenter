@@ -6,13 +6,21 @@ import {globalStyles} from '../../../constants/globalStyles';
 interface IBaseHeader {
   title: string;
   props: any;
+  color?: string;
+  onPress?: () => any;
 }
-const BaseHeader = ({title, props}: IBaseHeader) => {
+const BaseHeader = ({title, props, color, onPress}: IBaseHeader) => {
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {backgroundColor: color == undefined ? lightBlue : color},
+      ]}>
       <Pressable
         style={styles.iconContainer}
-        onPress={() => props.navigation.goBack()}>
+        onPress={
+          onPress == undefined ? () => props.navigation.goBack() : onPress
+        }>
         <Icon name="vector" color="black" size={16} />
       </Pressable>
       <Text style={[globalStyles.H3, {color: white, paddingRight: 40}]}>
@@ -27,7 +35,6 @@ export default BaseHeader;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: lightBlue,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

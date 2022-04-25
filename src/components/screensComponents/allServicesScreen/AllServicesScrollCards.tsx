@@ -3,8 +3,8 @@ import React from 'react';
 import HomeAreasList from '../homeScreen/HomeAreasList';
 import ServiceAreaCard from '../../baseComponents/buttons/ServiceAreaCard';
 
-const AllServicesScrollCards = (navigation: any) => {
-  const arr = HomeAreasList(navigation);
+const AllServicesScrollCards = (navigation: any, text: string) => {
+  const arr = HomeAreasList(navigation).filter(item=>item.name.includes(text));
   let twoCards = [];
   for (let i = 0; i < arr.length - 1; i += 2)
     twoCards.push(

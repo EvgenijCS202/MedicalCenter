@@ -1,60 +1,42 @@
 import React from 'react';
-import {View, Image, Text, StyleSheet} from 'react-native';
-import {globalStyles} from '../constants/globalStyles';
-import {height, width} from '../constants';
-import {white} from '../constants/colors';
-import DescriptionCard from '../components/baseComponents/buttons/DescriptionCard';
-import SubmitButton from '../components/baseComponents/buttons/SubmitButton';
+import {View, ScrollView, Text, StyleSheet} from 'react-native';
+import {globalStyles} from '../../constants/globalStyles';
+import {width} from '../../constants';
+import {white} from '../../constants/colors';
+import DescriptionCard from '../../components/baseComponents/buttons/DescriptionCard';
+import SubmitButton from '../../components/baseComponents/buttons/SubmitButton';
+import Appointment from '../../components/baseComponents/appointments/Appointment';
+import DateTitle from '../../components/screensComponents/dateScreen/DateTitle';
 interface IServiceScreen {
   navigation: any;
   route: {
     params: {
-      data: {
-        name: string;
-        description: String;
-        imgSource: any;
-        time: string;
-        age: string;
-        price: number;
-        conclusionTime: string;
-      };
+      data: Appointment;
     };
   };
 }
 export default function ServiceScreen({navigation, route}: IServiceScreen) {
   return (
-    <View style={{backgroundColor: white, height: height - 160}}>
+    <View style={{backgroundColor: white, height: '100%'}}>
       <View style={{flex: 1}}>
-        <View style={{flexDirection: 'row', marginVertical: 24}}>
-          <Image
-            style={{width: 60, height: 60, marginHorizontal: 16}}
-            source={route.params.data.imgSource}
-          />
-          <Text
-            style={[
-              globalStyles.H2,
-              {textAlignVertical: 'center', marginHorizontal: 10},
-            ]}>
-            {route.params.data.name}
-          </Text>
-        </View>
+        <DateTitle data={route.params.data} />
         <Text style={[globalStyles.text, styles.description]}>
           {route.params.data.description}
         </Text>
         <View style={styles.descCards}>
           <DescriptionCard
             title="Длительность обследования"
-            text={route.params.data.time}
+            text={route.params.data.info1}
             size={{width: (width - 48) / 3, height: (width - 48) / 3}}
           />
           <DescriptionCard
             title="Подготовка заключения"
-            text={route.params.data.conclusionTime}
+            text={route.params.data.info2}
             size={{width: (width - 48) / 3, height: (width - 48) / 3}}
           />
           <DescriptionCard
             title="Возраст"
-            text={route.params.data.age}
+            text={route.params.data.info3}
             size={{width: (width - 48) / 3, height: (width - 48) / 3}}
           />
         </View>
@@ -83,6 +65,6 @@ const styles = StyleSheet.create({
   },
   button: {
     marginHorizontal: 16,
-    marginBottom: 38,
+    marginVertical: 20,
   },
 });
